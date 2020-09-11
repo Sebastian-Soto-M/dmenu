@@ -25,5 +25,8 @@ static unsigned int lines      = 0;
  */
 static const char worddelimiters[] = " ";
 
+/* -n option; preselected item starting from 0 */
+static unsigned int preselected = 0;
+
 /* Size of the window border */
 static const unsigned int border_width = 5;
