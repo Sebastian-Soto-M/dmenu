@@ -796,7 +796,7 @@ setup(void)
 	win = XCreateWindow(dpy, parentwin, x, y, mw, mh, border_width,
 	                    CopyFromParent, CopyFromParent, CopyFromParent,
 	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
-	XSetWindowBorder(dpy, win, scheme[SchemeSel][ColBg].pixel);
+	XSetWindowBorder(dpy, win, scheme[SchemeMid][ColBg].pixel);
 	XSetClassHint(dpy, win, &ch);
 
 
@@ -859,6 +859,15 @@ readxresources(void) {
 			colors[SchemeSel][ColFg] = strdup(xval.addr);
 		else
 			colors[SchemeSel][ColFg] = strdup(colors[SchemeSel][ColFg]);
+        /*more colors xresources integration*/
+        if (XrmGetResource(xdb, "dmenu.adjbackground", "*", &type, &xval))
+            colors[SchemeMid][ColBg] = strdup(xval.addr);
+        else
+            colors[SchemeMid][ColBg] = strdup(colors[SchemeMid][ColBg]);
+        if (XrmGetResource(xdb, "dmenu.adjforeground", "*", &type, &xval))
+            colors[SchemeMid][ColFg] = strdup(xval.addr);
+        else
+            colors[SchemeMid][ColFg] = strdup(colors[SchemeMid][ColFg]);
 
 		XrmDestroyDatabase(xdb);
 	}
